@@ -66,7 +66,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]LeilaoDto leilaoDto)
+        public IActionResult Atualizar(int id, [FromBody]LeilaoDto leilaoDto)
         {
             // map dto to entity and set id
             var leilao = _mapper.Map<Leilao>(leilaoDto);

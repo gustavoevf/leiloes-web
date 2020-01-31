@@ -49,7 +49,6 @@ namespace WebApi.Services
 
             leilao.Finalizacao = leilaoParam.Finalizacao ?? leilao.Finalizacao;
             leilao.Nome = leilaoParam.Nome ?? leilao.Nome;
-            leilao.IndicUsado = leilaoParam.IndicUsado ?? leilao.IndicUsado;
             leilao.Finalizacao = leilaoParam.Finalizacao ?? leilao.Finalizacao;
             leilao.ValorInicial = leilaoParam.ValorInicial ?? leilao.ValorInicial;
 

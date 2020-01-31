@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { Usuario } from '@/_models';
+import { Usuario, Leilao } from '@/_models';
 import { UsuarioService, AuthenticationService, LeilaoService } from '@/_services';
 
 @Component({ templateUrl: 'home.component.html' })
@@ -22,14 +22,14 @@ export class HomeComponent implements OnInit {
         this.obterLeiloes();
     }
 
-    deleteUser(id: number) {
-        this.userService.delete(id)
-            .pipe(first())
-            .subscribe();
-    }
-
     deletarLeilao(id: number) {
         this.leilaoService.deletarLeilao(id)
+            .pipe(first())
+            .subscribe(() => this.obterLeiloes());
+        }
+
+    atualizarLeilao(leilao: Leilao) {
+        this.leilaoService.atualizarLeilao(leilao)
             .pipe(first())
             .subscribe(() => this.obterLeiloes());
     }
@@ -38,5 +38,9 @@ export class HomeComponent implements OnInit {
       this.leilaoService.obterLeiloes()
           .pipe(first())
           .subscribe(leiloes => this.leiloes = leiloes);
+    }
+
+    remocaoPermitida(leilao: Leilao) {
+      return leilao.responsavel == this.currentUser.username;
     }
 }

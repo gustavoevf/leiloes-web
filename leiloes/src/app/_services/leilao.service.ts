@@ -18,4 +18,8 @@ export class LeilaoService {
     deletarLeilao(id: number) {
         return this.http.delete(`${config.apiUrl}/leiloes/${id}`);
     }
+
+    atualizarLeilao(leilao: Leilao) {
+        return this.http.put(`${config.apiUrl}/leiloes/${leilao.id}`, leilao);
+    }
 }

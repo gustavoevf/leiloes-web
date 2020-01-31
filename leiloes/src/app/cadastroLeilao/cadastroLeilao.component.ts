@@ -39,7 +39,7 @@ export class CadastroLeilaoComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        this.cadastroForm.patchValue({abertura: new Date().toJSON().substring(0, 10), responsavel: this.usuarioAtivo.firstName});
+        this.cadastroForm.patchValue({abertura: new Date().toJSON().substring(0, 10), responsavel: this.usuarioAtivo.username});
 
 
 

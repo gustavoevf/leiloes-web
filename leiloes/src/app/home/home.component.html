@@ -1,0 +1,8 @@
+﻿<h1>Olá {{currentUser.firstName}}!</h1>
+<h3>Leilões:</h3>
+<ul>
+    <li *ngFor="let leilao of leiloes">
+      {{leilao.nome}} {{leilao.valorInicial}} {{leilao.responsavel}} {{leilao.abertura}} {{leilao.finalizacao}}
+    </li>
+            <a routerLink="/leilao" class="btn btn-link">Cadastrar Leilão</a>
+</ul>

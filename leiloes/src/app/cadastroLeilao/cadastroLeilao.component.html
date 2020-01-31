@@ -1,0 +1,37 @@
+<h2>Cadastro de Leilão</h2>
+<form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" formControlName="nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
+        <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+            <div *ngIf="f.nome.errors.required">Nome é obrigatório</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="valorInicial">Valor Inicial</label>
+        <input type="number" formControlName="valorInicial" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.valorInicial.errors}" min="1" step="any" />
+        <div *ngIf="submitted && f.valorInicial.errors" class="invalid-feedback">
+            <div *ngIf="f.valorInicial.errors.required">Valor Inicial é obrigatório</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="indicUsado">Usado</label>
+        <input type="checkbox" formControlName="indicUsado" class="form-check" [ngClass]="{ 'is-invalid': submitted && f.indicUsado.errors }" />
+    </div>
+    <div class="form-group">
+        <label for="finalizacao">Data de finalização</label>
+        <input type="date" formControlName="finalizacao" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.finalizacao.errors }" />
+        <div *ngIf="submitted && f.finalizacao.errors" class="invalid-feedback">
+            <div *ngIf="f.finalizacao.errors.required">Data de finalização é obrigatória</div>
+            <div *ngIf="f.finalizacao.errors.dataVencida">Data de finalização deve ser no futuro</div>
+            <div *ngIf="f.finalizacao.errors.dataDistante">Duração maxima de 2 meses</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Cadastrar
+        </button>
+        <a routerLink="/" class="btn btn-link">Cancelar</a>
+    </div>
+</form>

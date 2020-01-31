@@ -1,0 +1,35 @@
+﻿<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav">
+        <span class="navbar-brand" id="titulo-navegacao">Leilões</span>
+        <a class="nav-item nav-link" routerLink="/">Início</a>
+        <a *ngIf="currentUser" class="nav-item nav-link" (click)="logout()">Sair</a>
+    </div>
+</nav>
+
+<!-- main app container -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- credits -->
+<div class="text-center">
+    <p>
+        Sistema fictício para cadastro de leilões
+    </p>
+    <p>
+        Gustavo Ferreira
+    </p>
+    <p *ngIf="!currentUser">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/rS2FDyOKR2g" frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </p>
+
+</div>

@@ -47,9 +47,7 @@ namespace WebApi.Services
             if (leilao == null)
                 throw new AppException("Leilão não encontrado");
 
-            leilao.Finalizacao = leilaoParam.Finalizacao ?? leilao.Finalizacao;
             leilao.Nome = leilaoParam.Nome ?? leilao.Nome;
-            leilao.Finalizacao = leilaoParam.Finalizacao ?? leilao.Finalizacao;
             leilao.ValorInicial = leilaoParam.ValorInicial ?? leilao.ValorInicial;
 
 

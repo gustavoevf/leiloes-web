@@ -7,9 +7,9 @@ namespace WebApi.Entities
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Responsavel { get; set; }
-        public DateTime? Abertura { get; set; }
-        public DateTime? Finalizacao { get; set; }
-        public bool IndicUsado { get; set; }
+        public long Abertura { get; set; }
+        public long Finalizacao { get; set; }
+        public int IndicUsado { get; set; }
         public decimal? ValorInicial { get; set; }
     }
 }

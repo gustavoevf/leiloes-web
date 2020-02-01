@@ -1,28 +1,36 @@
 ﻿<h1>Olá {{currentUser.firstName}}!</h1>
-<h3>Leilões:</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col" class="texto-tabela">Nome</th>
-      <th scope="col" class="texto-tabela">Valor Inicial</th>
-      <th scope="col" class="texto-tabela">Responsavel</th>
-      <th scope="col" class="texto-tabela">Abertura</th>
-      <th scope="col" class="texto-tabela">Finalizacao</th>
-      <th scope="col" class="texto-tabela"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let leilao of leiloes">
-      <td class="texto-tabela">{{leilao.nome}}</td>
-      <td class="texto-tabela numerico">{{leilao.valorInicial}}</td>
-      <td class="texto-tabela">{{leilao.responsavel}}</td>
-      <td class="texto-tabela">{{leilao.abertura}}</td>
-      <td class="texto-tabela">{{leilao.finalizacao}}</td>
-      <td><a (click)="deletarLeilao(leilao.id)"
-        [hidden]="!remocaoPermitida(leilao)"
-        class="btn btn-link">Remover Leilão</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<a routerLink="/leilao" class="btn btn-link">Cadastrar Leilão</a>
+<div [hidden]="!leiloes.length == 0">
+  <h3>Não há leilões disponíveis</h3>
+</div>
+<div [hidden]="leiloes.length == 0">
+  <h3>Leilões disponíveis:</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="texto-tabela">Nome</th>
+        <th scope="col" class="texto-tabela">Valor Inicial</th>
+        <th scope="col" class="texto-tabela">Responsável</th>
+        <th scope="col" class="texto-tabela">Situação</th>
+        <th scope="col" class="texto-tabela">Estado</th>
+        <th scope="col" class="texto-tabela"></th>
+        <th scope="col" class="texto-tabela"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leilao of leiloes">
+        <td class="texto-tabela">{{leilao.nome}}</td>
+        <td class="texto-tabela numerico">{{leilao.valorInicial}}</td>
+        <td class="texto-tabela">{{leilao.responsavel}}</td>
+        <td class="texto-tabela">{{obterStatus(leilao.finalizacao)}}</td>
+        <td class="texto-tabela">{{leilao.indicUsado ? 'Usado' : 'Novo'}}</td>
+        <td (click)="deletarLeilao(leilao.id)"
+          [hidden]="!remocaoPermitida(leilao)"
+          class="btn btn-link texto-tabela">Remover</td>
+          <td routerLink="leilao"
+          [hidden]="!remocaoPermitida(leilao)"
+          class="btn btn-link texto-tabela">Editar</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<button routerLink="/leilao" class="btn btn-primary">Cadastrar Leilão</button>

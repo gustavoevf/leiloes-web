@@ -43,4 +43,8 @@ export class HomeComponent implements OnInit {
     remocaoPermitida(leilao: Leilao) {
       return leilao.responsavel == this.currentUser.username;
     }
+
+    obterStatus(data: string) {
+        return new Date(data).getTime() < Date.now() ? 'Encerrado' : 'Ativo'; 
+    }
 }

@@ -11,6 +11,7 @@ using WebApi.Services;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class LeiloesController : ControllerBase
@@ -29,7 +30,6 @@ namespace WebApi.Controllers
             _appSettings = appSettings.Value;
         }
 
-        [AllowAnonymous]
         [HttpPost("criar")]
         public IActionResult Register([FromBody]LeilaoDto leilaoDto)
         {

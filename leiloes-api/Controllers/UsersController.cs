@@ -34,11 +34,15 @@ namespace WebApi.Controllers
             _appSettings = appSettings.Value;
         }
 
+        /// <summary>
+        /// Autenticação de usuário
+        /// </summary>
+        /// <param name="usuario"></param>
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]UserDto userDto)
+        public IActionResult Authenticate([FromBody]UserDto usuario)
         {
-            var user = _userService.Authenticate(userDto.Username, userDto.Password);
+            var user = _userService.Authenticate(usuario.Username, usuario.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
@@ -66,17 +70,21 @@ namespace WebApi.Controllers
             });
         }
 
+        /// <summary>
+        /// Registra um novo usuário
+        /// </summary>
+        /// <param name="usuario"></param>
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]UserDto userDto)
+        public IActionResult Register([FromBody]UserDto usuario)
         {
             // map dto to entity
-            var user = _mapper.Map<User>(userDto);
+            var user = _mapper.Map<User>(usuario);
 
             try 
             {
                 // save 
-                _userService.Create(user, userDto.Password);
+                _userService.Create(user, usuario.Password);
                 return Ok();
             } 
             catch(AppException ex)
@@ -86,6 +94,9 @@ namespace WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtém todos os usuários
+        /// </summary>
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -94,6 +105,10 @@ namespace WebApi.Controllers
             return Ok(userDtos);
         }
 
+        /// <summary>
+        /// Obtém um usuário por id
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -102,17 +117,22 @@ namespace WebApi.Controllers
             return Ok(userDto);
         }
 
+        /// <summary>
+        /// Atualiza um usuário
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="id"></param>
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UserDto userDto)
+        public IActionResult Update(int id, [FromBody]UserDto usuario)
         {
             // map dto to entity and set id
-            var user = _mapper.Map<User>(userDto);
+            var user = _mapper.Map<User>(usuario);
             user.Id = id;
 
             try 
             {
                 // save 
-                _userService.Update(user, userDto.Password);
+                _userService.Update(user, usuario.Password);
                 return Ok();
             } 
             catch(AppException ex)
@@ -122,6 +142,10 @@ namespace WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove um usuário
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

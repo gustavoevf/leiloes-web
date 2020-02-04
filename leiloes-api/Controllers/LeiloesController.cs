@@ -30,17 +30,21 @@ namespace WebApi.Controllers
             _appSettings = appSettings.Value;
         }
 
+        /// <summary>
+        /// Cria um novo leilão
+        /// </summary>
+        /// <param name="leilao"></param>
         [HttpPost("criar")]
-        public IActionResult Register([FromBody]LeilaoDto leilaoDto)
+        public IActionResult Register([FromBody]LeilaoDto leilao)
         {
             // map dto to entity
-            var leilao = _mapper.Map<Leilao>(leilaoDto);
+            var leilaoEntity = _mapper.Map<Leilao>(leilao);
 
             try 
             {
                 // save 
-                _leilaoService.Criar(leilao);
-                return Ok(leilao);
+                _leilaoService.Criar(leilaoEntity);
+                return Ok(leilaoEntity);
             } 
             catch(AppException ex)
             {
@@ -49,6 +53,9 @@ namespace WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtém todos os leilões
+        /// </summary>
         [HttpGet]
         public IActionResult ObterTodos()
         {
@@ -57,6 +64,10 @@ namespace WebApi.Controllers
             return Ok(leiloesDtos);
         }
 
+        /// <summary>
+        /// Obtém o leilão por id
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
@@ -65,17 +76,22 @@ namespace WebApi.Controllers
             return Ok(leilaoDto);
         }
 
+        /// <summary>
+        /// Atualiza um leilão
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="leilao"></param>
         [HttpPut("{id}")]
-        public IActionResult Atualizar(int id, [FromBody]LeilaoDto leilaoDto)
+        public IActionResult Atualizar(int id, [FromBody]LeilaoDto leilao)
         {
             // map dto to entity and set id
-            var leilao = _mapper.Map<Leilao>(leilaoDto);
-            leilao.Id = id;
+            var leilaoEntity = _mapper.Map<Leilao>(leilao);
+            leilaoEntity.Id = id;
 
             try 
             {
                 // save 
-                _leilaoService.Atualizar(leilao);
+                _leilaoService.Atualizar(leilaoEntity);
                 return Ok();
             } 
             catch(AppException ex)
@@ -85,6 +101,10 @@ namespace WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove um leilão
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
